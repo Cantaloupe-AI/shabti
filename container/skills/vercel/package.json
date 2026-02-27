@@ -1,0 +1,9 @@
+{
+  "name": "vercel-skill",
+  "version": "1.0.0",
+  "description": "Read-only Vercel skill for checking deployments, build logs, and project status",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "axiom-skill",
+  "version": "1.0.0",
+  "description": "Read-only Axiom skill for querying logs and datasets",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}

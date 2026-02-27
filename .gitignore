@@ -1,0 +1,50 @@
+# ===== SENSITIVE / LOCAL FILES =====
+# Ignore ALL dotfiles and dotdirs by default, then whitelist what we need
+.*
+
+# Whitelist specific dotfiles we DO want tracked
+!.gitignore
+!.github
+!.github/**
+!.env.example
+!.nvmrc
+!.prettierrc
+!.mcp.json
+
+# ===== Dependencies =====
+node_modules/
+.npm-cache/
+
+# ===== Build output =====
+dist/
+
+# ===== Local data & auth =====
+store/
+data/
+logs/
+
+# ===== Groups =====
+groups/*
+!groups/main/
+!groups/global/
+groups/main/*
+groups/global/*
+!groups/main/CLAUDE.md
+!groups/global/CLAUDE.md
+
+# ===== Secrets =====
+*.keys.json
+
+# ===== OS =====
+.DS_Store
+
+# ===== IDE =====
+.idea/
+.vscode/
+
+# ===== Skills system (local per-installation state) =====
+.nanoclaw/
+
+# ===== Misc =====
+agents-sdk-docs
+snap/
