@@ -19,7 +19,14 @@ export default function RootLayout({
             <h1 className="text-lg font-semibold tracking-tight">
               <span className="text-[var(--text-muted)]">𓂀</span> NanoClaw
             </h1>
-            <span className="text-xs text-[var(--text-muted)]">dashboard</span>
+            <span className="text-xs text-[var(--text-muted)]">
+              dashboard
+              {process.env.NEXT_PUBLIC_COMMIT_SHA && (
+                <code className="ml-2 font-mono text-[10px] text-[var(--text-muted)] opacity-60">
+                  {process.env.NEXT_PUBLIC_COMMIT_SHA}
+                </code>
+              )}
+            </span>
           </div>
         </header>
         <main className="mx-auto max-w-5xl px-6 py-8">{children}</main>

@@ -35,3 +35,4 @@ groups/global/*
 .nanoclaw/
 
 agents-sdk-docs
+.vercel
