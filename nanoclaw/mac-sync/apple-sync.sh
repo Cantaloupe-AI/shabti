@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 #
-# apple-sync.sh — Extract iMessage and call metadata from macOS, SCP to NanoClaw
+# apple-sync.sh — Extract iMessage and call metadata from macOS, SCP to Shabti
 #
 # Reads Apple's chat.db and CallHistory databases for metadata only (no message content).
 # Maintains incremental sync state to avoid re-sending old records.
 #
 # Prerequisites:
 #   - Full Disk Access granted to Terminal (or iTerm2)
-#   - SSH key configured for NANOCLAW_HOST
+#   - SSH key configured for SHABTI_HOST
 #
 set -euo pipefail
 
 # --- Configuration ---
-NANOCLAW_HOST="${NANOCLAW_HOST:-nanoclaw-server}"
-NANOCLAW_PATH="${NANOCLAW_PATH:-~/nanoclaw/data/ipc/main/apple-sync}"
-STATE_DIR="${HOME}/.config/nanoclaw"
+SHABTI_HOST="${SHABTI_HOST:-shabti-server}"
+SHABTI_PATH="${SHABTI_PATH:-~/shabti/data/ipc/main/apple-sync}"
+STATE_DIR="${HOME}/.config/shabti"
 STATE_FILE="${STATE_DIR}/apple-sync-state.json"
 MESSAGES_DB="${HOME}/Library/Messages/chat.db"
 CALLS_DB="${HOME}/Library/Application Support/CallHistoryDB/CallHistory.storedata"
@@ -111,9 +111,9 @@ ENDJSON
 
 echo "Extracted ${IMESSAGE_COUNT} iMessages, ${CALLS_COUNT} calls"
 
-# --- SCP to NanoClaw ---
-scp "$OUTPUT_FILE" "${NANOCLAW_HOST}:${NANOCLAW_PATH}/sync-${DATE_TAG}.json"
-echo "Synced to ${NANOCLAW_HOST}"
+# --- SCP to Shabti ---
+scp "$OUTPUT_FILE" "${SHABTI_HOST}:${SHABTI_PATH}/sync-${DATE_TAG}.json"
+echo "Synced to ${SHABTI_HOST}"
 
 # --- Update state ---
 python3 -c "

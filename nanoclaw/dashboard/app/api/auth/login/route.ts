@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
   const payloadB64 = Buffer.from(JSON.stringify(payload))
     .toString("base64url");
   const signature = crypto
-    .createHmac("sha256", "nanoclaw:" + password)
+    .createHmac("sha256", "shabti:" + password)
     .update(payloadB64)
     .digest("base64url");
   const token = `${payloadB64}.${signature}`;

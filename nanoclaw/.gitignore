@@ -32,7 +32,7 @@ groups/global/*
 .vscode/
 
 # Skills system (local per-installation state)
-.nanoclaw/
+.shabti/
 
 agents-sdk-docs
 .vercel

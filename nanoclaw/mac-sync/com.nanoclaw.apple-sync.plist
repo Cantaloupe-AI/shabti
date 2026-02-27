@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.nanoclaw.apple-sync</string>
+    <string>com.shabti.apple-sync</string>
     <key>ProgramArguments</key>
     <array>
         <string>/bin/bash</string>
@@ -17,9 +17,9 @@
         <integer>0</integer>
     </dict>
     <key>StandardOutPath</key>
-    <string>/tmp/nanoclaw-apple-sync.log</string>
+    <string>/tmp/shabti-apple-sync.log</string>
     <key>StandardErrorPath</key>
-    <string>/tmp/nanoclaw-apple-sync.log</string>
+    <string>/tmp/shabti-apple-sync.log</string>
     <key>EnvironmentVariables</key>
     <dict>
         <key>PATH</key>

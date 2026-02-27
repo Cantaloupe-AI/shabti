@@ -30,7 +30,7 @@ export async function middleware(req: NextRequest) {
   }
 
   // Derive signing key from password so we only need one env var
-  const secret = new TextEncoder().encode("nanoclaw:" + password);
+  const secret = new TextEncoder().encode("shabti:" + password);
 
   // Verify HMAC using Web Crypto API (Edge Runtime)
   const key = await crypto.subtle.importKey(

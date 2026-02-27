@@ -5,11 +5,11 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-PLIST_SRC="${SCRIPT_DIR}/com.nanoclaw.apple-sync.plist"
-PLIST_DST="${HOME}/Library/LaunchAgents/com.nanoclaw.apple-sync.plist"
+PLIST_SRC="${SCRIPT_DIR}/com.shabti.apple-sync.plist"
+PLIST_DST="${HOME}/Library/LaunchAgents/com.shabti.apple-sync.plist"
 SYNC_SCRIPT="${SCRIPT_DIR}/apple-sync.sh"
 
-echo "=== NanoClaw Apple Sync Setup ==="
+echo "=== Shabti Apple Sync Setup ==="
 echo
 
 # Make sync script executable
@@ -17,7 +17,7 @@ chmod +x "$SYNC_SCRIPT"
 echo "[OK] Made apple-sync.sh executable"
 
 # Create state directory
-mkdir -p "${HOME}/.config/nanoclaw"
+mkdir -p "${HOME}/.config/shabti"
 echo "[OK] Created state directory"
 
 # Install launchd plist with correct path
@@ -34,12 +34,12 @@ echo
 echo "1. Grant Full Disk Access to Terminal:"
 echo "   System Settings > Privacy & Security > Full Disk Access > Add Terminal"
 echo
-echo "2. Configure SSH access to your NanoClaw server:"
-echo "   Set NANOCLAW_HOST in ~/.config/nanoclaw/env or ensure 'nanoclaw-server'"
+echo "2. Configure SSH access to your Shabti server:"
+echo "   Set SHABTI_HOST in ~/.config/shabti/env or ensure 'shabti-server'"
 echo "   is configured in ~/.ssh/config"
 echo
 echo "3. Ensure the IPC directory exists on the server:"
-echo "   ssh nanoclaw-server 'mkdir -p ~/nanoclaw/data/ipc/main/apple-sync'"
+echo "   ssh shabti-server 'mkdir -p ~/shabti/data/ipc/main/apple-sync'"
 echo
 echo "4. Test the sync:"
 echo "   ${SYNC_SCRIPT}"

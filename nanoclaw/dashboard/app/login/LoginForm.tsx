@@ -65,7 +65,7 @@ export function LoginForm() {
             marginBottom: "0.5rem",
           }}
         >
-          𓂀 NanoClaw
+          𓂀 Shabti
         </h1>
 
         <input

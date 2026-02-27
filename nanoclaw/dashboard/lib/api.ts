@@ -1,5 +1,5 @@
-const API_URL = process.env.NANOCLAW_API_URL || 'http://localhost:3001';
-const API_KEY = process.env.NANOCLAW_API_KEY || '';
+const API_URL = process.env.SHABTI_API_URL || 'http://localhost:3001';
+const API_KEY = process.env.SHABTI_API_KEY || '';
 
 export async function fetchApi<T>(path: string): Promise<T> {
   const res = await fetch(`${API_URL}${path}`, {
