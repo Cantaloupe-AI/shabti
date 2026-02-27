@@ -23,7 +23,11 @@ export async function middleware(req: NextRequest) {
   const signatureB64 = token.slice(dotIdx + 1);
 
   const password = process.env.DASHBOARD_PASSWORD;
-  if (!password) return redirectToLogin(req);
+  if (!password) {
+    return new NextResponse("DASHBOARD_PASSWORD not configured", {
+      status: 500,
+    });
+  }
 
   // Derive signing key from password so we only need one env var
   const secret = new TextEncoder().encode("nanoclaw:" + password);
