@@ -447,6 +447,7 @@ export function TaskList({
 
       {modalTask !== null && (
         <TaskFormModal
+          key={modalTask === 'new' ? 'new' : modalTask.id}
           task={modalTask === 'new' ? null : modalTask}
           onClose={() => setModalTask(null)}
           onSave={(data) =>
