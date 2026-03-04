@@ -318,6 +318,44 @@ export class GroupQueue {
     }
   }
 
+  getSnapshot(): {
+    activeCount: number;
+    maxConcurrent: number;
+    waitingCount: number;
+    groups: {
+      groupJid: string;
+      groupFolder: string | null;
+      active: boolean;
+      idleWaiting: boolean;
+      isTaskContainer: boolean;
+      pendingMessages: boolean;
+      pendingTaskCount: number;
+      containerName: string | null;
+    }[];
+  } {
+    const groups = [];
+    for (const [groupJid, state] of this.groups) {
+      if (state.active || state.pendingMessages || state.pendingTasks.length > 0) {
+        groups.push({
+          groupJid,
+          groupFolder: state.groupFolder,
+          active: state.active,
+          idleWaiting: state.idleWaiting,
+          isTaskContainer: state.isTaskContainer,
+          pendingMessages: state.pendingMessages,
+          pendingTaskCount: state.pendingTasks.length,
+          containerName: state.containerName,
+        });
+      }
+    }
+    return {
+      activeCount: this.activeCount,
+      maxConcurrent: MAX_CONCURRENT_CONTAINERS,
+      waitingCount: this.waitingGroups.length,
+      groups,
+    };
+  }
+
   async shutdown(_gracePeriodMs: number): Promise<void> {
     this.shuttingDown = true;
 

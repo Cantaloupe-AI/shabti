@@ -11,6 +11,7 @@ import {
   getTaskRunLogs,
   updateTask,
 } from './db.js';
+import type { GroupQueue } from './group-queue.js';
 import { logger } from './logger.js';
 
 const API_PORT = parseInt(process.env.API_PORT || '3001', 10);
@@ -45,7 +46,7 @@ function parseBody(req: http.IncomingMessage): Promise<Record<string, unknown>> 
   });
 }
 
-export function startApiServer(): http.Server {
+export function startApiServer(opts?: { queue?: GroupQueue }): http.Server {
   if (!DASHBOARD_API_KEY) {
     logger.warn('DASHBOARD_API_KEY not set — API server disabled');
     return null as unknown as http.Server;
@@ -131,6 +132,12 @@ export function startApiServer(): http.Server {
       } else if (pathname === '/api/groups') {
         const groups = getAllRegisteredGroups();
         json(res, groups);
+      } else if (pathname === '/api/sessions' && method === 'GET') {
+        if (opts?.queue) {
+          json(res, opts.queue.getSnapshot());
+        } else {
+          json(res, { activeCount: 0, maxConcurrent: 0, waitingCount: 0, groups: [] });
+        }
       } else {
         json(res, { error: 'Not found' }, 404);
       }

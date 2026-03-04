@@ -1,4 +1,5 @@
 import { fetchApi, type ScheduledTask, type RegisteredGroup } from '@/lib/api';
+import { ActiveSessions } from './active-sessions';
 import { TaskList } from './task-list';
 
 export const dynamic = 'force-dynamic';
@@ -36,6 +37,14 @@ export default async function DashboardPage() {
         <StatCard label="Active Tasks" value={activeTasks} />
         <StatCard label="Total Tasks" value={tasks.length} />
       </div>
+
+      {/* Active sessions */}
+      <section>
+        <h2 className="mb-4 text-sm font-medium text-[var(--text-muted)] uppercase tracking-wider">
+          Active Sessions
+        </h2>
+        <ActiveSessions />
+      </section>
 
       {/* Task list */}
       <section>

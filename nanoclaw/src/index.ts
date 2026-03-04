@@ -468,7 +468,7 @@ async function main(): Promise<void> {
   }
 
   // Start API server for dashboard
-  startApiServer();
+  startApiServer({ queue });
 
   // Start subsystems (independently of connection handler)
   startSchedulerLoop({

@@ -66,3 +66,21 @@ export interface RegisteredGroup {
   added_at: string;
   requiresTrigger?: boolean;
 }
+
+export interface ActiveSession {
+  groupJid: string;
+  groupFolder: string | null;
+  active: boolean;
+  idleWaiting: boolean;
+  isTaskContainer: boolean;
+  pendingMessages: boolean;
+  pendingTaskCount: number;
+  containerName: string | null;
+}
+
+export interface SessionsSnapshot {
+  activeCount: number;
+  maxConcurrent: number;
+  waitingCount: number;
+  groups: ActiveSession[];
+}
