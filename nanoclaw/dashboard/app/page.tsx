@@ -20,9 +20,11 @@ export default async function DashboardPage() {
 
   if (error) {
     return (
-      <div className="rounded-lg border border-[var(--error)]/30 bg-[var(--error)]/5 p-6">
-        <p className="text-sm text-[var(--error)]">Failed to load: {error}</p>
-      </div>
+      <main className="mx-auto max-w-5xl px-6 py-8">
+        <div className="rounded-lg border border-[var(--error)]/30 bg-[var(--error)]/5 p-6">
+          <p className="text-sm text-[var(--error)]">Failed to load: {error}</p>
+        </div>
+      </main>
     );
   }
 
@@ -30,6 +32,7 @@ export default async function DashboardPage() {
   const activeTasks = tasks.filter((t) => t.status === 'active').length;
 
   return (
+    <main className="mx-auto max-w-5xl px-6 py-8">
     <div className="space-y-8">
       {/* Stats */}
       <div className="grid grid-cols-3 gap-4">
@@ -54,6 +57,7 @@ export default async function DashboardPage() {
         <TaskList tasks={tasks} groups={groups} />
       </section>
     </div>
+    </main>
   );
 }
 
