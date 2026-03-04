@@ -3,6 +3,18 @@ import { fetchApi, mutateApi, type ScheduledTask, type TaskRunLog } from '@/lib/
 
 export async function GET(request: NextRequest) {
   const taskId = request.nextUrl.searchParams.get('taskId');
+  const list = request.nextUrl.searchParams.get('list');
+
+  // Return all tasks when ?list=1
+  if (list) {
+    try {
+      const tasks = await fetchApi<ScheduledTask[]>('/api/tasks');
+      return NextResponse.json(tasks);
+    } catch (e) {
+      const message = e instanceof Error ? e.message : 'Unknown error';
+      return NextResponse.json({ error: message }, { status: 502 });
+    }
+  }
 
   if (!taskId) {
     return NextResponse.json({ error: 'taskId required' }, { status: 400 });

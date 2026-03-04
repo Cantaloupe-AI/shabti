@@ -65,7 +65,13 @@ interface FormState {
   perDayValue: number;
 }
 
+const DEFAULT_SCHEDULE: Pick<FormState, 'mode' | 'intervalValue' | 'intervalUnit' | 'perDayValue'> = {
+  mode: 'interval', intervalValue: 30, intervalUnit: 'minutes', perDayValue: 1,
+};
+
 function msToForm(ms: number): Pick<FormState, 'mode' | 'intervalValue' | 'intervalUnit' | 'perDayValue'> {
+  if (!ms || !isFinite(ms) || ms <= 0) return DEFAULT_SCHEDULE;
+
   const minutes = ms / 60_000;
   const hours = ms / 3_600_000;
 
@@ -410,6 +416,23 @@ export function TaskList({
     }
   }, []);
 
+  const fetchFreshTasks = useCallback(async (): Promise<ScheduledTask[]> => {
+    try {
+      const res = await fetch('/api/tasks?list=1');
+      if (res.ok) {
+        const fresh: ScheduledTask[] = await res.json();
+        setTasks(fresh);
+        return fresh;
+      }
+    } catch { /* fall through */ }
+    return tasks;
+  }, [tasks]);
+
+  const handleOpenEdit = useCallback(async (task: ScheduledTask) => {
+    const fresh = await fetchFreshTasks();
+    setModalTask(fresh.find((t) => t.id === task.id) || task);
+  }, [fetchFreshTasks]);
+
   const handleDelete = useCallback(async (id: string) => {
     if (!confirm('Delete this task? This cannot be undone.')) return;
     const res = await fetch(`/api/tasks/${id}`, { method: 'DELETE' });
@@ -437,7 +460,7 @@ export function TaskList({
             <TaskCard
               key={task.id}
               task={task}
-              onEdit={() => setModalTask(task)}
+              onEdit={() => handleOpenEdit(task)}
               onToggle={() => handleToggle(task)}
               onDelete={() => handleDelete(task.id)}
             />
