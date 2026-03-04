@@ -14,6 +14,27 @@ export async function fetchApi<T>(path: string): Promise<T> {
   return res.json() as Promise<T>;
 }
 
+export async function mutateApi<T = unknown>(
+  path: string,
+  method: 'POST' | 'PATCH' | 'DELETE',
+  body?: unknown,
+): Promise<T> {
+  const res = await fetch(`${API_URL}${path}`, {
+    method,
+    headers: {
+      'X-API-Key': API_KEY,
+      'Content-Type': 'application/json',
+    },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+
+  if (!res.ok) {
+    throw new Error(`API error: ${res.status} ${res.statusText}`);
+  }
+
+  return res.json() as Promise<T>;
+}
+
 export interface ScheduledTask {
   id: string;
   group_folder: string;

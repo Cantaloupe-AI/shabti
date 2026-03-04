@@ -42,7 +42,7 @@ export default async function DashboardPage() {
         <h2 className="mb-4 text-sm font-medium text-[var(--text-muted)] uppercase tracking-wider">
           Scheduled Tasks
         </h2>
-        <TaskList tasks={tasks} />
+        <TaskList tasks={tasks} groups={groups} />
       </section>
     </div>
   );
